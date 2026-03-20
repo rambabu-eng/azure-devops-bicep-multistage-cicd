@@ -32,10 +32,10 @@ output storageAccountName string = storage.name
 resource logAnalytics 'Microsoft.OperationalInsights/workspaces@2022-10-01' = {
   name: 'law-${storageAccountName}'
   location: location
-  sku: {
-    name: 'PerGB2018'
-  }
   properties: {
+    sku: {
+      name: 'PerGB2018'
+    }
     retentionInDays: 30
   }
 }
@@ -44,12 +44,6 @@ resource diag 'Microsoft.Insights/diagnosticSettings@2021-05-01-preview' = {
   scope: storage
   properties: {
     workspaceId: logAnalytics.id
-    logs: [
-      {
-        categoryGroup: 'allLogs'
-        enabled: true
-      }
-    ]
     metrics: [
       {
         category: 'AllMetrics'
