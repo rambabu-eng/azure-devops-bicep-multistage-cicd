@@ -3,7 +3,7 @@
   "contentVersion": "1.0.0.0",
   "parameters": {
     "storageAccountName": {
-      "value": "stdevopsprod001"
+      "value": "stdevopsramsprod001"
     },
     "environment": {
       "value": "prod"
