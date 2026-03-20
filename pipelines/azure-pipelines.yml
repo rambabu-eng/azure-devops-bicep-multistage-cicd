@@ -5,7 +5,7 @@ pool:
   vmImage: ubuntu-latest
 
 variables:
- - group: vg-devops-bicep
+- group: vg-devops-bicep
 
 stages:
 - stage: Validate
@@ -14,6 +14,7 @@ stages:
   - job: Validate
     steps:
     - template: templates/validate.yml
+
 - stage: Deploy_Dev
   displayName: 'Deploy to Dev'
   dependsOn: Validate
@@ -25,11 +26,8 @@ stages:
       parameters:
         resourceGroup: $(devResourceGroup)
         parameterFile: infra/parameters/dev.parameters.json
+
 - stage: Deploy_Prod
-  displayName: 'Deploy to Prod'
-  dependsOn: Deploy_Dev
-  jobs:
-  - stage: Deploy_Prod
   displayName: 'Deploy to Prod'
   dependsOn: Deploy_Dev
   jobs:
