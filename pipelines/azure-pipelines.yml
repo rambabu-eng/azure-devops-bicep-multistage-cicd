@@ -48,7 +48,8 @@ stages:
             --parameters @infra/parameters/dev.parameters.json \
             --parameters location=$(location)
 - stage: Deploy_Prod
-dependsOn: Deploy_Dev
+  displayName: 'Deploy to Prod'
+  dependsOn: Deploy_Dev
   jobs:
   - deployment: DeployProd
     environment: 'prod'
