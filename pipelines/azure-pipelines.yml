@@ -5,10 +5,7 @@ pool:
   vmImage: ubuntu-latest
 
 variables:
-  azureServiceConnection: 'sc-devops-bicep-subscription'
-  devResourceGroup: 'rg-devops-bicep-dev'
-  prodResourceGroup: 'rg-devops-bicep-prod'
-  location: 'australiaeast'
+ - group: vg-devops-bicep
 
 stages:
 - stage: Validate
