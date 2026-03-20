@@ -46,11 +46,7 @@ resource diag 'Microsoft.Insights/diagnosticSettings@2021-05-01-preview' = {
     workspaceId: logAnalytics.id
     logs: [
       {
-        category: 'StorageRead'
-        enabled: true
-      }
-      {
-        category: 'StorageWrite'
+        categoryGroup: 'allLogs'
         enabled: true
       }
     ]
