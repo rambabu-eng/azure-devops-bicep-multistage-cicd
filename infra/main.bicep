@@ -29,3 +29,36 @@ resource storage 'Microsoft.Storage/storageAccounts@2023-05-01' = {
 }
 
 output storageAccountName string = storage.name
+resource logAnalytics 'Microsoft.OperationalInsights/workspaces@2022-10-01' = {
+  name: 'law-${storageAccountName}'
+  location: location
+  sku: {
+    name: 'PerGB2018'
+  }
+  properties: {
+    retentionInDays: 30
+  }
+}
+resource diag 'Microsoft.Insights/diagnosticSettings@2021-05-01-preview' = {
+  name: 'diag-storage'
+  scope: storage
+  properties: {
+    workspaceId: logAnalytics.id
+    logs: [
+      {
+        category: 'StorageRead'
+        enabled: true
+      }
+      {
+        category: 'StorageWrite'
+        enabled: true
+      }
+    ]
+    metrics: [
+      {
+        category: 'AllMetrics'
+        enabled: true
+      }
+    ]
+  }
+}
