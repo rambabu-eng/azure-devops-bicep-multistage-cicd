@@ -73,7 +73,7 @@ Code → Validate → What-If → Deploy Dev → Approval → Deploy Prod
 
 ### 🔹 Production Approval Gate
 ![Approval](docs/screenshots/prod-approval-pending.png)
-
+![Approval](docs/screenshots/prod-approval-screen.png)
 ---
 
 ### 🔹 Production Deployment
@@ -84,7 +84,7 @@ Code → Validate → What-If → Deploy Dev → Approval → Deploy Prod
 
 ### 🔹 Azure Resources
 ![Storage](docs/screenshots/storage-account-overview.png)
-![Log Analytics](docs/screensshots/log-analytics-overview.png)
+![Log Analytics](docs/screenshots/log-analytics-overview.png)
 
 ---
 
