@@ -10,7 +10,7 @@ The solution implements a multi-stage pipeline with validation, what-if preview,
 
 ## 🏗️ Architecture
 
-![Architecture](docs/screenshots/architecture/architecture-diagram.png)
+![Architecture](docs/architecture/architecture-diagram.png)
 
 ---
 
@@ -55,48 +55,48 @@ Code → Validate → What-If → Deploy Dev → Approval → Deploy Prod
 ## 📸 Screenshots
 
 ### 🔹 Pipeline Overview
-![Pipeline](docs/screenshots/pipeline/pipeline-overview.png)
+![Pipeline](docs/screenshots/pipeline-overview.png)
 
 ---
 
 ### 🔹 Validation & What-If
-![Validation](docs/screenshots/validation/validate-stage-success.png)
-![WhatIf](docs/screenshots/03-validation/what-if-output.png)
+![Validation](docs/screenshots/validate-stage-success.png)
+![WhatIf](docs/screenshots/what-if-output.png)
 
 ---
 
 ### 🔹 Dev Deployment
-![Dev Deploy](docs/screenshots/dev-deployment/dev-deployment-success.png)
-![Dev Resources](docs/screenshots/dev-deployment/dev-resources.png)
+![Dev Deploy](docs/screenshots/dev-deployment-success.png)
+![Dev Resources](docs/screenshots/dev-resources.png)
 
 ---
 
 ### 🔹 Production Approval Gate
-![Approval](docs/screenshots/prod-approval/prod-approval-pending.png)
+![Approval](docs/screenshots/prod-approval-pending.png)
 
 ---
 
 ### 🔹 Production Deployment
-![Prod Deploy](docs/screenshots/prod-deployment/prod-deployment-success.png)
-![Prod Resources](docs/screenshots/prod-deployment/prod-resources.png)
+![Prod Deploy](docs/screenshots/prod-deployment-success.png)
+![Prod Resources](docs/screenshots/prod-resources.png)
 
 ---
 
 ### 🔹 Azure Resources
-![Storage](docs/screenshots/azure-resources/storage-account-overview.png)
-![Log Analytics](docs/screensshots/azure-resources/log-analytics-overview.png)
+![Storage](docs/screenshots/storage-account-overview.png)
+![Log Analytics](docs/screensshots/log-analytics-overview.png)
 
 ---
 
 ### 🔹 Monitoring
-![Diagnostics](docs/screenshots/monitoring/diagnostic-settings.png)
-![Logs](docs/screenshots/08-monitoring/log-analytics-logs.png)
+![Diagnostics](docs/screenshots/diagnostic-settings.png)
+![Logs](docs/screenshots/log-analytics-logs.png)
 
 ---
 
 ### 🔹 Resource Tagging (Governance)
-![Tags Storage](docs/screenshots/tags/tags-storage.png)
-![Tags LA](docs/screenshots/tags/tags-loganalytics.png)
+![Tags Storage](docs/screenshots/tags-storage.png)
+![Tags LA](docs/screenshots/tags-loganalytics.png)
 
 ---
 
