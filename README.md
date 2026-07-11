@@ -1,126 +1,188 @@
-# 🚀 Azure DevOps Bicep Multi-Stage CI/CD Pipeline
+# Azure DevOps Bicep Multi-Stage CI/CD Pipeline
 
-## 📌 Overview
+A multi-stage Azure DevOps pipeline for deploying Azure infrastructure using **Bicep Infrastructure as Code**.
 
-This project demonstrates an end-to-end Azure DevOps CI/CD pipeline for deploying Azure infrastructure using Bicep (Infrastructure as Code).
+The solution demonstrates infrastructure validation, What-If change preview, automated Development deployment, approval-controlled Production release, reusable YAML templates, monitoring, and resource governance.
 
-The solution implements a multi-stage pipeline with validation, what-if preview, automated Dev deployment, and approval-based Production release. It also integrates monitoring and governance practices such as tagging and diagnostics.
+## Architecture
 
----
+![Azure DevOps Bicep Pipeline Architecture](docs/architecture/architecture-diagram.png)
 
-## 🏗️ Architecture
+```text
+Developer
+   │
+   ▼
+Azure Repos
+   │
+   ▼
+Azure DevOps Pipeline
+   │
+   ├── Validate Bicep
+   ├── Run What-If
+   ├── Deploy to Development
+   ├── Production Approval
+   └── Deploy to Production
+                  │
+                  ▼
+           Azure Resources
+                  │
+          ┌───────┴────────┐
+          ▼                ▼
+     Log Analytics     Resource Tags
+```
 
-![Architecture](docs/architecture/architecture-diagram.png)
+## Pipeline Flow
 
----
+```text
+Code
+→ Validate
+→ What-If
+→ Deploy Development
+→ Production Approval
+→ Deploy Production
+```
 
-## 🔄 Pipeline Flow
+### Pipeline Stages
 
+1. **Validate**
+   Builds and validates the Bicep templates before deployment.
 
-Code → Validate → What-If → Deploy Dev → Approval → Deploy Prod
+2. **What-If**
+   Previews planned Azure resource changes.
 
+3. **Deploy Development**
+   Automatically deploys infrastructure to the Development environment.
 
-### Stages:
-- **Validate** → Bicep build + What-If preview
-- **Deploy Dev** → Automatic deployment to Dev environment
-- **Deploy Prod** → Approval-gated deployment to Production
+4. **Production Approval**
+   Requires manual approval before the Production deployment proceeds.
 
----
+5. **Deploy Production**
+   Deploys the approved infrastructure configuration to Production.
 
-## ⚙️ Key Features
+## Design Principles
 
-- ✅ Multi-stage Azure DevOps pipeline  
-- ✅ Infrastructure as Code using Bicep  
-- ✅ What-If validation before deployment  
-- ✅ Environment-based deployment (Dev & Prod)  
-- ✅ Manual approval gate for Production  
-- ✅ Reusable YAML templates (modular pipeline design)  
-- ✅ Centralized configuration using Variable Groups  
-- ✅ Monitoring with Log Analytics  
-- ✅ Governance using resource tagging  
+The solution applies Azure DevOps and infrastructure delivery practices through:
 
----
+* **Infrastructure as Code:** Azure resources are defined using reusable Bicep modules.
+* **Controlled change:** What-If provides visibility into infrastructure changes before deployment.
+* **Environment separation:** Development and Production use separate deployment stages and configuration.
+* **Release governance:** Production deployment requires manual approval.
+* **Operational visibility:** Diagnostic settings send platform logs to Log Analytics.
+* **Resource governance:** Standard resource tags support ownership, environment identification, and cost visibility.
+* **Pipeline reuse:** YAML templates reduce duplication across stages and environments.
 
-## 🧰 Technologies Used
+## Technology Stack
 
-- Azure DevOps (Pipelines)
-- Bicep (IaC)
-- Azure CLI
-- Azure Storage Account
-- Azure Monitor (Log Analytics)
-- Azure Resource Groups
+| Area                   | Technology                          |
+| ---------------------- | ----------------------------------- |
+| Cloud platform         | Microsoft Azure                     |
+| CI/CD                  | Azure DevOps Pipelines              |
+| Infrastructure as Code | Bicep                               |
+| Pipeline definition    | YAML                                |
+| Deployment tooling     | Azure CLI                           |
+| Configuration          | Variable Groups and parameter files |
+| Monitoring             | Azure Monitor and Log Analytics     |
+| Governance             | Resource tagging                    |
+| Environments           | Development and Production          |
 
----
+## Repository Structure
 
-## 📸 Screenshots
+```text
+.
+├── bicep/
+│   ├── main.bicep
+│   ├── modules/
+│   └── parameters/
+├── pipelines/
+│   └── templates/
+├── azure-pipelines.yml
+└── docs/
+    ├── architecture/
+    └── screenshots/
+```
 
-### 🔹 Pipeline Overview
-![Pipeline](docs/screenshots/pipeline-overview.png)
+> Update this structure to match the exact folders used in the repository.
 
----
+## Pipeline Configuration
 
-### 🔹 Validation & What-If
-![Validation](docs/screenshots/validate-stage-success.png)
-![WhatIf](docs/screenshots/what-if-output.png)
+The pipeline uses:
 
----
+* Reusable YAML templates
+* Environment-specific parameter files
+* Azure DevOps Variable Groups
+* Azure service connection authentication
+* Development and Production environments
+* Production approval checks
 
-### 🔹 Dev Deployment
-![Dev Deploy](docs/screenshots/dev-deployment-success.png)
-![Dev Resources](docs/screenshots/dev-resources.png)
+## Monitoring and Governance
 
----
+Azure resources are configured with:
 
-### 🔹 Production Approval Gate
-![Approval](docs/screenshots/prod-approval-pending.png)
-![Approval](docs/screenshots/prod-approval-screen.png)
----
+* Diagnostic settings
+* Centralised Log Analytics collection
+* Environment and ownership tags
+* Resource-level operational visibility
 
-### 🔹 Production Deployment
-![Prod Deploy](docs/screenshots/prod-deployment-success.png)
-![Prod Resources](docs/screenshots/prod-resources.png)
+Example governance tags:
 
----
+```text
+Environment = Development | Production
+ManagedBy   = Bicep
+Project     = Azure-DevOps-Bicep-Pipeline
+Owner       = Platform-Team
+```
 
-### 🔹 Azure Resources
-![Storage](docs/screenshots/storage-account-overview.png)
-![Log Analytics](docs/screenshots/log-analytics-overview.png)
+## Project Evidence
 
----
+### Pipeline Execution
 
-### 🔹 Monitoring
-![Diagnostics](docs/screenshots/diagnostic-settings.png)
-![Logs](docs/screenshots/log-analytics-logs.png)
+![Pipeline Overview](docs/screenshots/pipeline-overview.png)
 
----
+### Validation and What-If
 
-### 🔹 Resource Tagging (Governance)
-![Tags Storage](docs/screenshots/tags-storage.png)
-![Tags LA](docs/screenshots/tags-loganalytics.png)
+![Validation Stage](docs/screenshots/validate-stage-success.png)
 
----
+![What-If Output](docs/screenshots/what-if-output.png)
 
-## 🧠 Key Learnings
+### Development Deployment
 
-- Designed and implemented CI/CD pipelines for infrastructure using Bicep  
-- Applied DevOps best practices with staged deployments and approvals  
-- Used What-If deployment to prevent unintended changes  
-- Implemented monitoring and diagnostics using Azure Monitor  
-- Applied tagging strategy for cost visibility and governance  
-- Built reusable and modular pipeline templates  
+![Development Deployment](docs/screenshots/dev-deployment-success.png)
 
----
+### Production Approval
 
-## 🔮 Future Enhancements
+![Production Approval](docs/screenshots/prod-approval-pending.png)
 
-- Azure Policy for enforcing tagging standards  
-- Cost alerts and budget monitoring  
-- Terraform-based pipeline integration  
-- Containerized application deployment (Docker + ACR + AKS)  
+### Production Deployment
 
----
+![Production Deployment](docs/screenshots/prod-deployment-success.png)
 
-## 👤 Author
+### Monitoring and Governance
 
-**Rambabu Katta**  
-Azure | DevOps | Cloud Engineer (Transitioning)
+![Diagnostic Settings](docs/screenshots/diagnostic-settings.png)
+
+![Resource Tags](docs/screenshots/tags-storage.png)
+
+## Key Outcomes
+
+* Built a multi-stage infrastructure deployment pipeline using Azure DevOps and Bicep.
+* Added Bicep validation and What-If previews before deployment.
+* Automated Development infrastructure deployment.
+* Implemented approval-controlled Production releases.
+* Created reusable YAML pipeline templates.
+* Centralised diagnostic data in Log Analytics.
+* Applied resource tagging for governance and cost visibility.
+
+## Roadmap
+
+* Azure Policy for enforcing tagging and configuration standards
+* Azure budget alerts and cost monitoring
+* Workload identity or federated authentication for pipeline access
+* Automated post-deployment validation
+* Bicep linting and security scanning
+* Deployment rollback and failure-handling procedures
+* Additional environments such as Test or Staging
+
+## Author
+
+**Rambabu Katta**
+Azure Cloud, DevOps and Platform Engineering
